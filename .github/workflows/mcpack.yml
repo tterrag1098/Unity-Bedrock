@@ -21,11 +21,13 @@ jobs:
     - name: Create .mcpack
       uses: TheDoctor0/zip-release@0.4.1
       with:
-        # Artifact name
-        filename: unity-${{ steps.extract_branch.outputs.branch }}-${{ steps.extract_ish.outputs.ish }}.${{ github.run_id }}
-        # A file, directory or wildcard pattern that describes what to upload
+        filename: pack.mcpack
         path: |
-          assets/**
+          textures/**
           LICENSE.md
-          pack.mcmeta
-          pack.png
+          
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: unity-${{ steps.extract_branch.outputs.branch }}-${{ steps.extract_ish.outputs.ish }}.${{ github.run_id }}
+        path: pack.mcpack
